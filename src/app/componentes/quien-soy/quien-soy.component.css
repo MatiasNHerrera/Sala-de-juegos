@@ -1,0 +1,98 @@
+.imagenDeQuienSoy{
+    width: 100%;
+    height: 60%;
+    margin-top: 10%;
+    border-radius: 50%;
+    }
+.imgPerfil
+{
+    -webkit-box-shadow: 10px 10px 5px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px -1px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px -1px rgba(0,0,0,0.75);
+}
+.imgWeb
+{
+    margin-top: 20%;
+}
+.imgSis
+{
+    margin-top: 20%;
+}
+body {
+    font: 20px Montserrat, sans-serif;
+    line-height: 1.8;
+    color: #f5f6f7;
+}
+p {font-size: 16px;}
+.margin {margin-bottom: 45px;}
+.bg-1 { 
+    background-color: ghostwhite; /* Green */
+    color: #2f2f2f;
+}
+.bg-2 { 
+    background-color: #9a9c9e; /* Dark Blue */
+    color: #2f2f2f;
+}
+.bg-3 { 
+    background-color: ghostwhite; /* White */
+    color: #2f2f2f;
+}
+
+.container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.navBack
+{
+    width: 100%;
+    height: 5%;
+    background-color: black;
+    position: fixed;
+}
+
+.navbar-nav  li a:hover {
+    color: #1abc9c !important;
+}
+
+.navbarItem
+{
+    height: 100%;
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 0.7%;
+    text-decoration: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: oblique;
+    font-size: 18px;
+    transition: 0.4s
+}
+
+.navbarItem:hover
+{
+    background-color: rgb(106, 94, 212);
+}
+
+.wp
+{
+    width: 62px;
+    transition: 0.3s;
+}
+
+.wp:hover
+{
+    width: 67px;
+}
+
+.social
+{
+    transition: 0.3s;
+    width: 55px;
+    
+}
+
+.social:hover
+{
+    width : 60px;
+}

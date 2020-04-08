@@ -1,0 +1,65 @@
+.panel
+{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80vw;
+    height: 30vh;
+    max-height: 30vh;
+    left: 10%;
+    margin-top: 5%;
+}
+
+p
+{   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 80vw;
+    height: 10vh;
+    color: ghostwhite;
+    font-family: 'game';
+    font-size: 6vw;
+}
+
+.navbarItem
+{
+    position: relative;
+    width: 8vw;
+    padding: 1.1vw;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1.2vw;
+    opacity: none;
+}
+
+.navbarItem:hover
+{
+    border-bottom: 4px solid rgb(56, 56, 56);
+}
+
+#navbar
+{
+    align-items: center;
+    position: fixed;
+    width: 100vw;
+    height: 5.8vh;
+    display: inline-flex;
+    top: 0;
+    background: rgb(97, 97, 97);
+    z-index: 1;
+}
+
+.github
+{
+    align-items: center;
+    position: relative;
+    top: -3%;
+    font-size: 3vw;
+    left: 71%;
+    color: rgb(255, 255, 255);
+}

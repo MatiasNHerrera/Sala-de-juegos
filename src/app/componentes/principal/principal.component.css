@@ -1,0 +1,98 @@
+
+.contenedorLista
+{
+    display: grid;
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr;
+    width: 86vw;
+    height: 92.6vh;
+    max-width: 86vw;
+    max-height: 92.6vh;
+    background: rgba(97, 97, 97,0.6);
+    margin: auto;
+    margin-bottom: 10%;
+    border-radius: 20px;
+}
+
+.juegos, .listadoJuegos, .configuracion, .jugadores
+{
+    position: relative;
+    display: flex;
+    background: none;
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+    width: 43vw;
+    height: 46.3vh;
+    transition: 0.3s;
+}
+
+.juegos
+{
+    border-top-left-radius: 4%;
+    border-right: solid 1px rgb(255, 255, 255);
+    border-bottom: solid 2px rgb(255, 255, 255);
+}
+
+.juegos:hover, .listadoJuegos:hover, .configuracion:hover, .jugadores:hover
+{
+    background-color: rgba(216, 218, 218, 0.6);
+    -webkit-box-shadow: 2px 3px 32px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 3px 32px 0px rgba(0,0,0,0.75);
+    box-shadow: 2px 3px 32px 0px rgba(0,0,0,0.75);
+}
+
+.juegos img
+{
+    position: relative;
+    width: 35vw;
+    left: 12%;
+    max-height: 50vh;
+}
+
+.listadoJuegos
+{
+    border-top-right-radius: 4%;
+    border-left: solid 1px rgb(255, 255, 255);
+    border-bottom: solid 2px rgb(255, 255, 255);
+}
+
+.listadoJuegos img
+{
+    position: relative;
+    width: 25vw;
+    left: 35%;
+    max-height: 40vh;
+}
+
+.configuracion
+{
+    border-bottom-left-radius: 4%;
+    border-right: solid 1px rgb(255, 255, 255);
+}
+
+.configuracion img
+{
+    position: relative;
+    width: 30vw;
+    left: 22%;
+    max-height: 40vh;
+}
+
+.jugadores
+{
+    border-bottom-right-radius: 4%;
+    border-left: solid 1px rgb(255, 255, 255);
+}
+
+.jugadores img
+{
+    position: relative;
+    width: 30vw;
+    height: 40vh;
+    max-width: 30vw;
+    max-height: 40vh;
+    left: 20%;
+}
