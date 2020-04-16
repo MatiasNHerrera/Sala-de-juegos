@@ -1,29 +1,39 @@
-<ul class="nav nav-pills nav-justified">
-  <li class="active"><a routerLink="/Principal">Ir a inicio</a></li>
-  <li><a (click)="TraerTodos()">Todos los jugadores</a></li>
-  <li><a (click)="TraerGanadores()">Los ganadores</a></li>
-  <li><a (click)="TraerPerdedores()">Los perdedores</a></li>
-</ul>
+<button class="inicio" value="Inicio" routerLink="/Principal">Inicio</button>
+<div class="buttons">
+  <input type="button" value="Todos los jugadores" (click)="TraerTodos()">
+  <input type="button" value="Los ganadores" (click)="TraerGanadores()">
+  <input type="button" value="Los Perdedores" (click)="TraerPerdedores()">
+</div>
 
-
-
-<table class="table table-condensed">
-  <thead>
-    <tr>
-      <th>usuario</th>
-      <th>cuit</th>
-      <th>sexo</th>
-      <th>gano</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let jugador of listado" >
-      <td>{{jugador.usuario}} </td>
-      <td>{{jugador.cuit}} </td> 
-      <td>{{jugador.sexo | sexo| uppercase}} </td> 
-      <td>{{jugador.gano}} </td> 
+<table class="tabla">
+    <thead>
+      <tr>
+        <th>usuario</th>
+        <th>cuit</th>
+        <th>sexo</th>
+        <th>gano</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let jugador of listado" >
+        <td>{{jugador.usuario}}</td>
+        <td>{{jugador.cuit}}</td> 
+        <td>{{jugador.sexo | sexo | uppercase}}</td> 
+        <td>{{jugador.gano}}</td> 
+      </tr>
+      <tr>
+        <td>Herrera</td>
+        <td>2032323</td> 
+        <td>Masculino</td> 
+        <td>si</td> 
+      </tr>
+      <tr>
+        <td>El Pibe</td>
+        <td>4434343</td> 
+        <td>Masculino</td> 
+        <td>no</td> 
+      </tr>
       
-    </tr>
-   
-  </tbody>
-</table>
+      
+    </tbody>
+  </table>

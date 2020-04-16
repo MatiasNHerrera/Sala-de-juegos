@@ -1,14 +1,14 @@
 .panel
 {
     position: relative;
-    display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 80vw;
     height: 30vh;
     max-height: 30vh;
     left: 10%;
-    margin-top: 5%;
+    margin-top: 10%;
+    padding-top: 5%;
 }
 
 p
@@ -24,42 +24,55 @@ p
     font-size: 6vw;
 }
 
-.navbarItem
+nav 
 {
-    position: relative;
-    width: 8vw;
-    padding: 1.1vw;
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    text-align: center;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 1.2vw;
-    opacity: none;
-}
-
-.navbarItem:hover
-{
-    border-bottom: 4px solid rgb(56, 56, 56);
-}
-
-#navbar
-{
-    align-items: center;
     position: fixed;
-    width: 100vw;
-    height: 5.8vh;
-    display: inline-flex;
-    top: 0;
+    top: 0%;
+    text-align: left;
+    color: ghostwhite;
+    width: 100%;
+    max-height: 6%;
+    min-height: 6%;
     background: rgb(97, 97, 97);
     z-index: 1;
 }
+  
+  
+  nav ul li {
+   display: inline-block;
+   padding: 0 2em;
+   line-height: 3.5em;
+   transition: 0.4s;
+  }
+  
+  ul
+  {
+    padding: 0%;
+  }
+
+
+  nav ul li:hover {
+    background-color: black;
+    color: ghostwhite;
+  }
+
+li a
+{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
+    text-decoration: none;
+    font-size: 1em;
+    color: inherit;
+}
+
 
 .github
 {
-    align-items: center;
-    position: relative;
-    top: -3%;
-    font-size: 3vw;
-    left: 71%;
-    color: rgb(255, 255, 255);
+    position: absolute;
+    left: 96%;
+    top: 10%
+}   
+
+i
+{
+    font-size: 30px;
 }

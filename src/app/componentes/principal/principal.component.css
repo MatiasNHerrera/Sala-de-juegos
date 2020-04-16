@@ -6,8 +6,6 @@
     align-items: center;
     justify-items: center;
     grid-template-columns: 1fr 1fr;
-    width: 86vw;
-    height: 92.6vh;
     max-width: 86vw;
     max-height: 92.6vh;
     background: rgba(97, 97, 97,0.6);
