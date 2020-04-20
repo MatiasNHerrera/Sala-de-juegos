@@ -1,0 +1,23 @@
+<div class="containerGame" id="containerGame">
+    <p id="errores"></p>
+    <img src="../../../assets/imagenes/ahorcado.png" alt="" width="40%">
+    <p>{{palabraAdivinadaHastaAhora}}</p>
+    <div class="buttons">
+        <button *ngFor="let letra of letras" (click)="hastaElMomento(letra)">{{letra}}</button>
+    </div>
+</div>
+<div class="containerMensaje" id="containerMensaje" hidden>
+    <div *ngIf="gano; else perdio">
+        <p>¡FELICITACIONES, ADIVINASTE CON EXITO!</p>
+        <button (click)="recargar()">VOLVER A JUGAR</button>
+        <button routerLink="/Juegos">RETIRARSE</button>
+    </div>
+    <ng-template #perdio>
+        <div class="perdio">
+            <p>PERDISTE, PENSA MEJOR LA PROXIMA</p>
+            <button (click)="recargar()">VOLVER A JUGAR</button>
+            <button routerLink="/Juegos">RETIRARSE</button>
+        </div>
+    </ng-template>
+</div>
+
