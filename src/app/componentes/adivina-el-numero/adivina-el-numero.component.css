@@ -1,17 +1,33 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'game';
+    color: black;
+}
 
 form {
-    border: 10px solid #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 50vh;
     padding: 10px;
-    background:gray;
+    margin: 20% auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
 }
 
 input[type=text], input[type=password] {
+    background: rgba(102, 102, 102,0.5);
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
     box-sizing: border-box;
+    color: black;
+    text-align: center;
 }
 
 button {
@@ -22,6 +38,31 @@ button {
     border: none;
     cursor: pointer;
     width: 100%;
+}
+
+label
+{
+    font-size: 2em;
+}
+
+.verificar
+{
+    background: rgb(196, 44, 44);
+    border-radius: 5px;
+}
+
+.titulo
+{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top:10%;
+    left: 50%;
+}
+
+.nuevoNumero
+{
+    background: rgb(44, 185, 63);
+    border-radius: 5px;
 }
 
 button:hover {

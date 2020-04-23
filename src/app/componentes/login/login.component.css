@@ -90,20 +90,13 @@ input[type="text"]
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: ghostwhite;
     transition: 0.5s;
+    outline: none;
 }
 
 .cancelar
 {
-    display: inline-block;
-    background: rgb(230, 60, 60);
-    border-radius: 20px;
-    border: none;
-    height: 5vh;
     margin: 2%;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: ghostwhite;
     width: 58%;
-    transition: 0.5s;
 }
 
 .cancelar:hover, .registrar:hover, .ingresar:hover
@@ -116,6 +109,22 @@ input[type=checkbox]
 {
     position: relative;
     margin-top: 10%;
+}
+
+.mensaje
+{
+    position: absolute;
+    margin: 5% auto;
+    left: 25%;
+    width: 50%;
+    height: 5vh;
+    background: rgb(49, 108, 236);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ghostwhite;
+    padding: 4%;
 }
 
 /* Change styles for span and cancel button on extra small screens */

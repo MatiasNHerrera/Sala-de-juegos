@@ -1,7 +1,7 @@
 *
 {
     font-family: "game";
-    color: ghostwhite;
+    color: black;
 }
 
 .containerGame
@@ -17,7 +17,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    background: rgba(85, 85, 85, 0.712);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 5px;
 }
 
@@ -34,7 +34,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    background: rgba(85, 85, 85, 0.712);
+    background: rgba(255, 255, 255, 0.9);
     animation: aparicion ease-in 0.1s;
 }
 
@@ -104,6 +104,7 @@ button
     transition: 0.3s;
     cursor: pointer;
     text-align: center;
+    color: ghostwhite;
 }
 
 button:hover

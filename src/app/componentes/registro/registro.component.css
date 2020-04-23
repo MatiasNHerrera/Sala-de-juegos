@@ -164,6 +164,7 @@ input[type="text"]
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: ghostwhite;
     transition: 0.5s;
+    outline: none;
 }
 
 
@@ -177,6 +178,19 @@ input[type=checkbox]
 {
     position: relative;
     margin-top: 10%;
+}
+
+.mensaje
+{
+    margin: 10% auto;
+    width: 50%;
+    height: 5vh;
+    background: rgb(206, 21, 21);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ghostwhite;
 }
 
 

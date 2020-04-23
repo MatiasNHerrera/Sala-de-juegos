@@ -1,11 +1,6 @@
-<!--div *ngFor="let juego of listado">
+<button class="inicio" value="Inicio" routerLink="/Principal">Inicio</button>
 
-<p> {{juego.nombre}} </p>
-<p> {{juego.jugador}} </p>
-
-</div-->
-
-<table class="table table-condensed">
+<table class="tabla">
     <thead>
       <tr>
         <th>Juego</th>
@@ -20,6 +15,5 @@
         <td *ngIf="juego.gano">Gano </td>   
         <td *ngIf="!juego.gano">Perdio</td>     
       </tr>
-     
     </tbody>
-  </table>
+</table>

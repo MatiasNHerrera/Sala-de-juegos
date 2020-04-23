@@ -2,33 +2,24 @@
       <div class="container">
         <div class="img"></div>
         <div class="formContainer">
+          <form (ngSubmit)="registrar()">
             <p>REGISTRO</p>
             <div class="divUsuario">
-              <input type="text" name="usuario" id="usuario" placeholder="Ingrese Usuario" required>
+              <input type="text" name="correo" id="correo" placeholder="Ingrese Correo" [(ngModel)]="this.correo" required>
             </div>
             <div class="divClave">
-              <input type="password" name="clave" id="clave" placeholder="Ingrese Clave" required>
+              <input type="password" name="clave" id="clave" placeholder="Ingrese Clave" [(ngModel)]="this.clave" required>
             </div>
             <div class="divClaveRepetida">
-              <input type="password" name="clave" id="clave" placeholder="Repita la clave" required>
+              <input type="password" name="claveRepetida" id="claveRepetida" placeholder="Repita la clave" [(ngModel)]="this.claveRepetida" required>
             </div>
             <div class="buttons">
-              <input type="button" value="Registrarse" class="registrar">
+              <input type="submit" value="Registrarse" class="registrar">
               <input type="button" value="Cancelar" class="cancelar" routerLink="/Principal">
             </div>
+            <div class="mensaje" id="mensaje" style="display: none;">
+            </div>
+          </form>
         </div>
       </div>
-  
-  <script>
-  // Get the modal
-  var modal = document.getElementById('id01');
-  
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-      if (event.target == modal) {
-          modal.style.display = "none";
-      }
-  }
-  </script>
-  
   </body>

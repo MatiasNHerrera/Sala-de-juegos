@@ -6,3 +6,14 @@
 export const environment = {
   production: false
 };
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyBoBVG4361nYtQAhQKX7y0a19FK6POOtno",
+  authDomain: "sala-de-juegos-65b70.firebaseapp.com",
+  databaseURL: "https://sala-de-juegos-65b70.firebaseio.com",
+  projectId: "sala-de-juegos-65b70",
+  storageBucket: "sala-de-juegos-65b70.appspot.com",
+  messagingSenderId: "339916196895",
+  appId: "1:339916196895:web:9f715ef55c4484c475592a",
+  measurementId: "G-JQ6TSSVBJW"
+};

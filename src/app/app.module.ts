@@ -54,6 +54,9 @@ import { AgmCoreModule } from '@agm/core';
 import { InputJugadoresComponent } from './componentes/input-jugadores/input-jugadores.component';
 import { SexoPipe } from './pipes/sexo.pipe';
 import { AhorcadoComponent } from './componentes/ahorcado/ahorcado.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { firebaseConfig } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -89,7 +92,9 @@ import { AhorcadoComponent } from './componentes/ahorcado/ahorcado.component';
     HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB6f8x4IjRlesQ3oETc6BXYQHVRTOlY3Ys'
-    })
+    }),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule
     // NgbModule.forRoot(MiRuteo),
     // importo el ruteo
     // RouterModule.forRoot(MiRuteo)

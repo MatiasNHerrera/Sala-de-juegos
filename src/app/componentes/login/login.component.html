@@ -3,17 +3,19 @@
     <div class="formContainer">
         <p>LOGIN</p>
         <div class="divUsuario">
-          <input type="text" name="usuario" id="usuario" placeholder="Ingrese Usuario" required>
+          <input type="text" name="correo" id="correo" placeholder="Ingrese Correo" required [(ngModel)]="this.correo">
         </div>
         <div class="divClave">
-          <input type="password" name="clave" id="clave" placeholder="Ingrese Clave" required>
+          <input type="password" name="clave" id="clave" placeholder="Ingrese Clave" required [(ngModel)]="this.clave">
         </div>
         <div class="buttons">
-          <input type="button" value="Ingresar" class="ingresar">
-          <input type="button" value="Registrarse" class="registrar">
-          <input type="button" value="Cancelar" class="cancelar" routerLink="/Principal">
+          <input type="button" value="Ingresar" class="ingresar" (click)="loguearse()">
+          <input type="button" value="Registrarse" class="registrar" routerLink="/Registro">
+          <input type="button" value="Cancelar" class="cancelar registrar" routerLink="/Principal">
         </div>
         <input type="checkbox" name="" id="" value="Recordarme">
         <label for="">Recordarme</label>
+        <div class="mensaje" id="mensaje" style="display: none;">
+        </div>
     </div>
 </div>

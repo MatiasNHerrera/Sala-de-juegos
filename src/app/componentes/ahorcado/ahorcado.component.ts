@@ -13,7 +13,8 @@ export class AhorcadoComponent implements OnInit {
   "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
   palabras = ["zapato", "teclado", "lechuga", "otorrinolaringolo","poesia", "militar", "programacion"
-             , "monarca", "nefasto"];
+             , "monarca", "nefasto", "particula", "molecula", "rapero", "opera", "monitor"
+             , "localidad", "mentalmente", "titulo", "jirafa"];
 
   gano : boolean;
   palabraParaAdivinar : string;
@@ -24,17 +25,16 @@ export class AhorcadoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    let random = Math.floor(Math.random() * (this.palabras.length - 0) + 0); 
-    this.palabraParaAdivinar = this.palabras[random];
     this.generarPalabra();
   }
 
   generarPalabra()
   {
-
+    let random = Math.floor(Math.random() * (this.palabras.length - 0) + 0); 
+    this.palabraParaAdivinar = this.palabras[random];
     for(let i = 0; i < this.palabraParaAdivinar.length; i++)
     {
-        this.palabraAdivinadaHastaAhora += "_";
+      this.palabraAdivinadaHastaAhora += "_";
     }
   }
 
@@ -94,7 +94,14 @@ export class AhorcadoComponent implements OnInit {
 
   recargar()
   {
-    window.location.reload();
+    $("#containerMensaje").attr("hidden", true);
+    $("#containerGame").removeAttr("hidden");
+    this.letrasErradas = "";
+    this.numeroFallos = 0;
+    this.palabraAdivinadaHastaAhora = "";
+    this.palabraParaAdivinar = "";
+    $("#errores").text("");
+    this.generarPalabra();
   }
 
   mostrarMensaje()
