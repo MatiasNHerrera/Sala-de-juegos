@@ -56,6 +56,7 @@ import { SexoPipe } from './pipes/sexo.pipe';
 import { AhorcadoComponent } from './componentes/ahorcado/ahorcado.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { PiedraPapelTijeraComponent } from './componentes/piedra-papel-tijera/piedra-papel-tijera.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     InputJugadoresComponent,
     SexoPipe,
     AhorcadoComponent,
+    PiedraPapelTijeraComponent,
   ],
   imports: [
     BrowserModule,

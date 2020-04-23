@@ -1,0 +1,27 @@
+<div id="containerGame" class="container">
+    <div class="jugador">
+        <h1>TU</h1>
+        <div class="imagenes">
+            <img src="../../../assets/imagenes/papel.png" (click)="seleccionar('papel')" id="papel" alt="">
+            <img src="../../../assets/imagenes/piedra.png" (click)="seleccionar('piedra')" id="piedra" alt="">
+            <img src="../../../assets/imagenes/tijera.png" (click)="seleccionar('tijera')" id="tijera" alt="">
+        </div>
+        <h1 class="puntosJugador" id="puntosJugador">Puntos: 0</h1>
+    </div>
+    <div class="maquina">
+        <h1>MAQUINA</h1>
+        <div class="imagenes">
+            <img src="../../../assets/imagenes/papel.png" id="papelMaquina" alt="">
+            <img src="../../../assets/imagenes/piedra.png" id="piedraMaquina" alt="">
+            <img src="../../../assets/imagenes/tijera.png" id="tijeraMaquina" alt="">
+        </div>
+        <h1 class="puntosMaquina" id="puntosMaquina">Puntos: 0</h1>
+    </div>
+</div>
+<div class="containerMensaje" id="containerMensaje" hidden>
+    <div>
+        <p id="mensajeP"></p>
+        <button (click)="reiniciarJuego()">VOLVER A JUGAR</button>
+        <button routerLink="/Juegos">RETIRARSE</button>
+    </div>
+</div>
