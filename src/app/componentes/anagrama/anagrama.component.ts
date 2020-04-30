@@ -9,7 +9,7 @@ import { IfStmt } from '@angular/compiler';
 })
 export class AnagramaComponent implements OnInit {
 
-  palabraIngresada : string;
+  palabraIngresada : string = "";
   palabraAdivinar: string;
   palabras:string[] = ['habian','usted','estados','hizo','nadie','paises','horas','posible','tarde','ley','importante',
   'guerra','desarrollo','proceso','realidad','sentido','lado','cambio','mano','eran','estar','numero','rey','correr','repetir','escuela',
