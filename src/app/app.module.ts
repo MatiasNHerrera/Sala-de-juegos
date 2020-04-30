@@ -57,6 +57,7 @@ import { AhorcadoComponent } from './componentes/ahorcado/ahorcado.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { PiedraPapelTijeraComponent } from './componentes/piedra-papel-tijera/piedra-papel-tijera.component';
+import { TaTeTiComponent } from './componentes/ta-te-ti/ta-te-ti.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { PiedraPapelTijeraComponent } from './componentes/piedra-papel-tijera/pi
     SexoPipe,
     AhorcadoComponent,
     PiedraPapelTijeraComponent,
+    TaTeTiComponent,
   ],
   imports: [
     BrowserModule,

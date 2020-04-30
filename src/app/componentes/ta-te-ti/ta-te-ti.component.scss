@@ -1,0 +1,152 @@
+$font-fam : 'game';
+$color : ghostwhite;
+
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:$font-fam;
+    color: $color;
+}
+
+.containerGame
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 70%;
+    height: 80%;
+    transform: translate(-50%, -50%);
+    background: rgba(63, 63, 63, 0.9);
+    border-radius: 10px;
+}
+
+.container
+{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 70%;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.fila
+{
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.celda
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 33.3%;
+    height: 100%;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+img
+{
+    width: 50%;
+}
+
+.disabled
+{
+    pointer-events: none;
+}
+
+.containerMensaje
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    width: 70%;
+    height: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: rgba(255, 255, 255, 0.9);
+    animation: aparicion ease-in 0.1s;
+}
+
+@keyframes aparicion
+{
+    0%{width: 0%; height: 0%;}
+    100%{width: 70%; height: 40%;}
+}
+
+@keyframes aparicion-button
+{
+    0%{width: 0%; height: 0%;}
+    100%{width: 30%; height: 20%;}
+}
+
+@keyframes aparicion-p
+{
+    0%{font-size: 0em;}
+    100%{font-size: 3em;}
+}
+
+.containerMensaje p
+{
+    animation: aparicion-p ease-in 0.1s;
+}
+
+p
+{
+    font-size: 3em;
+    letter-spacing: 5px;
+    color: black;
+}
+
+button
+{
+    width: 60%;
+    height: 20%;
+    margin: 1%;
+    background: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 2em;
+    outline: none;
+    transition: 0.3s;
+    cursor: pointer;
+    text-align: center;
+    color: ghostwhite;
+    animation: aparicion-button ease-in 0.1s;
+    font-size: 1em;
+}
+
+button:hover
+{
+    background: rgb(170, 50, 50);
+    color: black;
+}
+
+h1
+{
+    position: absolute;
+}
+
+.desafiar
+{
+    bottom: 2%;
+}
+
+.presentacion
+{
+    top: 5%;
+}

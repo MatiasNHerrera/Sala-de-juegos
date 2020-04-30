@@ -1,0 +1,26 @@
+<div class="containerGame" id="gameContainer">
+    <h1 class="presentacion">TA - TE - TI</h1>
+    <div class="container" id="containerTateti">
+        <div class="fila">
+            <div class="celda" (click)="seleccionarJugador(0,0, 'x')"><img src="" alt="" id="cell00" ></div>
+            <div class="celda" (click)="seleccionarJugador(0,1, 'x')"><img src="" alt="" id="cell01" ></div>
+            <div class="celda" (click)="seleccionarJugador(0,2, 'x')"><img src="" alt="" id="cell02" ></div>
+        </div>
+        <div class="fila">
+            <div class="celda" (click)="seleccionarJugador(1,0, 'x')"><img src="" alt="" id="cell10"></div>
+            <div class="celda" (click)="seleccionarJugador(1,1, 'x')"><img src="" alt="" id="cell11" ></div>
+            <div class="celda" (click)="seleccionarJugador(1,2, 'x')"><img src="" alt="" id="cell12" ></div>
+        </div>
+        <div class="fila">
+            <div class="celda" (click)="seleccionarJugador(2,0, 'x')"><img src="" alt="" id="cell20"></div>
+            <div class="celda" (click)="seleccionarJugador(2,1, 'x')"><img src="" alt="" id="cell21"></div>
+            <div class="celda" (click)="seleccionarJugador(2,2, 'x')"><img src="" alt="" id="cell22"></div>
+        </div>
+    </div>
+    <h1 class="desafiar" *ngIf="!comenzado">Seleccione para comenzar</h1>
+</div>
+<div class="containerMensaje" id="containerMensajeTateti" hidden>
+    <p id="mensajeTateti"></p>
+    <button (click)="reiniciar()">VOLVER A JUGAR</button>
+    <button routerLink="/Juegos">RETIRARSE</button>
+</div>
