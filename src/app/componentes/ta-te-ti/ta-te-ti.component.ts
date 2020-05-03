@@ -53,7 +53,7 @@ export class TaTeTiComponent implements OnInit {
     this.comenzado = true;
     if(this.validar(fila,columna,jug)){
 
-        if(this.contJugados < 8)
+        if(this.contJugados < 8 && this.resultado == "")
         {
           this.esperarMaquina();
         }
