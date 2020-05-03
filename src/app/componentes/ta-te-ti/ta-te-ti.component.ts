@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { Router } from '@angular/router';
+import { MiHttpService } from '../../servicios/mi-http/mi-http.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-ta-te-ti',
@@ -10,12 +12,28 @@ import { Router } from '@angular/router';
 })
 export class TaTeTiComponent implements OnInit {
 
+  usuariosGeneral;
+  usuarioLogueado : string;
+  usuariosTateti : any[];
+  contGanados : number = 0;
+  contPerdidos : number = 0;
   comenzado : boolean = false;
   resultado : string = "";
   contJugados = 0;
   celdas : number[][] = [[0,0,0],[0,0,0],[0,0,0]];
 
-  constructor(private navegador : Router) { }
+  constructor(private navegador : Router, private service : MiHttpService, private db : AngularFirestore) 
+  {
+    this.service.getTateti().subscribe((datos) => {
+      this.usuariosTateti = datos;
+      this.usuarioLogueado = localStorage.getItem("usuario");
+      this.verificarNuevoTateti();
+    });
+
+    this.service.getUsuarios().subscribe((datos) => {
+      this.usuariosGeneral = datos;
+    })
+  }
 
   ngOnInit(): void {
   }
@@ -41,6 +59,7 @@ export class TaTeTiComponent implements OnInit {
         }
         else if(this.contJugados == 9 && this.resultado == "")
         {
+          this.resultado = "¡EMPATE!";
           this.mostrarMensaje("¡EMPATE!");
         }
     }
@@ -136,8 +155,8 @@ export class TaTeTiComponent implements OnInit {
     
     if(retorno != "")
     {
-      this.mostrarMensaje(retorno);
       this.resultado = retorno;
+      this.mostrarMensaje(retorno);
     }
   }
 
@@ -146,6 +165,8 @@ export class TaTeTiComponent implements OnInit {
     $("#mensajeTateti").text(mensaje)
     $("#gameContainer").attr("hidden", true);
     $("#containerMensajeTateti").removeAttr("hidden");
+    this.cambiarResultadoBD();
+    this.cambiarResultadoUsuario();
   }
   
   reiniciar()
@@ -165,5 +186,104 @@ export class TaTeTiComponent implements OnInit {
 
     $("#gameContainer").removeAttr("hidden");
     $("#containerMensajeTateti").attr("hidden", true);
+  }
+
+  cambiarResultadoBD()
+  {
+    let flag = false; 
+
+    for(let usu of this.usuariosTateti)
+    {
+      if(usu.usuario == this.usuarioLogueado)
+      {
+        this.modificarExistente(usu);
+        break;
+      }
+    }
+  }
+
+  verificarNuevoTateti()
+  {
+    let flag = false;
+
+    for(let usu of this.usuariosTateti)
+    {
+      if(usu.usuario == this.usuarioLogueado)
+      {
+        flag = true;
+        break;
+      }
+    }
+
+    if(!flag)
+    {
+      this.db.collection("tateti").doc(this.usuarioLogueado).set(
+        {
+          gano : 0,
+          perdio : 0,
+          usuario : this.usuarioLogueado,
+          juego : "tateti"
+        });
+    }
+  }
+
+  cambiarResultadoUsuario()
+  {
+    let flag = false; 
+
+    for(let usu of this.usuariosGeneral)
+    {
+      if(usu.nombre == this.usuarioLogueado)
+      {
+        this.modificarUsuarioPuntaje(usu)
+        break;
+      }
+    }
+  }
+
+  modificarExistente(usuario)
+  {
+    if(this.resultado == "¡GANASTE!")
+    {
+      usuario.gano++;
+      this.db.collection("tateti").doc(this.usuarioLogueado).update({
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+        usuario : usuario.usuario,
+        juego : "tateti"
+      })
+    }
+    else if(this.resultado == "¡PERDISTE!")
+    {
+      usuario.perdio++;
+      this.db.collection("tateti").doc(this.usuarioLogueado).update({
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+        usuario : usuario.usuario,
+        juego : "tateti"
+      })
+    }
+  } 
+
+  modificarUsuarioPuntaje(usuario)
+  { 
+    if(this.resultado == "¡GANASTE!")
+    {
+      usuario.gano++;
+      this.db.collection("usuarios").doc(this.usuarioLogueado).update({
+        nombre : this.usuarioLogueado,
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+      });
+    }
+    else if(this.resultado == "¡PERDISTE!")
+    {
+      usuario.perdio++;
+      this.db.collection("usuarios").doc(this.usuarioLogueado).update({
+        nombre : this.usuarioLogueado,
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+      });
+    }
   }
 }

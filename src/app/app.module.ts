@@ -56,6 +56,7 @@ import { SexoPipe } from './pipes/sexo.pipe';
 import { AhorcadoComponent } from './componentes/ahorcado/ahorcado.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { PiedraPapelTijeraComponent } from './componentes/piedra-papel-tijera/piedra-papel-tijera.component';
 import { TaTeTiComponent } from './componentes/ta-te-ti/ta-te-ti.component';
 
@@ -104,7 +105,8 @@ import { TaTeTiComponent } from './componentes/ta-te-ti/ta-te-ti.component';
     messagingSenderId: "339916196895",
     appId: "1:339916196895:web:9f715ef55c4484c475592a",
     measurementId: "G-JQ6TSSVBJW"}),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFirestoreModule
     // NgbModule.forRoot(MiRuteo),
     // importo el ruteo
     // RouterModule.forRoot(MiRuteo)

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JugadoresService } from '../../servicios/jugadores.service';
+import { MiHttpService } from '../../servicios/mi-http/mi-http.service';
 @Component({
   selector: 'app-jugadores-listado',
   templateUrl: './jugadores-listado.component.html',
@@ -7,11 +7,14 @@ import { JugadoresService } from '../../servicios/jugadores.service';
 })
 export class JugadoresListadoComponent implements OnInit {
 
-  listado:any
-  miJugadoresServicio:JugadoresService
+  ganadores: boolean = false;
+  perdedores : boolean;
+  listadoGeneral:any[];
   
-    constructor(serviceJugadores:JugadoresService) {
-      this.miJugadoresServicio = serviceJugadores;
+    constructor(private service : MiHttpService) {
+      this.service.getUsuarios().subscribe((datos)=>{
+        this.listadoGeneral = datos;
+      })
       
     }
     
@@ -22,26 +25,16 @@ export class JugadoresListadoComponent implements OnInit {
 
 
   TraerTodos(){
-    //alert("totos");
-    this.miJugadoresServicio.traertodos('jugadores/','todos').then(data=>{
-      //console.info("jugadores listado",(data));
-      this.listado= data;
-
-    })
+    this.ganadores = false;
+    this.perdedores = false;
   }
   TraerGanadores(){
-    this.miJugadoresServicio.traertodos('jugadores/','ganadores').then(data=>{
-      //console.info("jugadores listado",(data));
-      this.listado= data;
-
-    })
+    this.ganadores = false;
+    this.perdedores = true;
   }
   TraerPerdedores(){
-    this.miJugadoresServicio.traertodos('jugadores/','perdedores').then(data=>{
-      //console.info("jugadores listado",(data));
-      this.listado= data;
-
-    })
+    this.perdedores = false;
+    this.ganadores = true;
   }
 
 }

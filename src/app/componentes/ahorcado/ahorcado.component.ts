@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import { MiHttpService } from '../../servicios/mi-http/mi-http.service'
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-ahorcado',
@@ -8,6 +10,9 @@ import * as $ from 'jquery';
 })
 export class AhorcadoComponent implements OnInit {
 
+  usuariosGeneral;
+  usuariosAhorcado;
+  usuarioLogueado;
   letras = ["A", "B", "C", "D", "E", "F", "G", "H", 
   "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", 
   "S", "T", "U", "V", "W", "X", "Y", "Z"];
@@ -22,7 +27,18 @@ export class AhorcadoComponent implements OnInit {
   letrasErradas : string = "";
   numeroFallos: number = 0;
 
-  constructor() { }
+  constructor(private service : MiHttpService, private db : AngularFirestore) 
+  {
+    this.service.getAhorcado().subscribe((datos) => {
+      this.usuariosAhorcado = datos;
+      this.usuarioLogueado = localStorage.getItem("usuario");
+      this.verificarNuevoAhorcado();
+    });
+
+    this.service.getUsuarios().subscribe((datos) => {
+      this.usuariosGeneral = datos;
+    })
+  }
 
   ngOnInit(): void {
     this.generarPalabra();
@@ -108,6 +124,107 @@ export class AhorcadoComponent implements OnInit {
   {
     $("#containerGame").attr("hidden", true);
     $("#containerMensaje").removeAttr("hidden");
+    this.cambiarResultadoBD();
+    this.cambiarResultadoUsuario();
+  }
+
+  verificarNuevoAhorcado()
+  {
+    let flag = false;
+
+    for(let usu of this.usuariosAhorcado)
+    {
+      if(usu.usuario == this.usuarioLogueado)
+      {
+        flag = true;
+        break;
+      }
+    }
+
+    if(!flag)
+    {
+      this.db.collection("ahorcado").doc(this.usuarioLogueado).set(
+        {
+          gano : 0,
+          perdio : 0,
+          usuario : this.usuarioLogueado,
+          juego : "ahorcado"
+        });
+    }
+  }
+
+  cambiarResultadoBD()
+  {
+    let flag = false; 
+
+    for(let usu of this.usuariosAhorcado)
+    {
+      if(usu.usuario == this.usuarioLogueado)
+      {
+        this.modificarExistente(usu);
+        break;
+      }
+    }
+  }
+
+  cambiarResultadoUsuario()
+  {
+    let flag = false; 
+
+    for(let usu of this.usuariosGeneral)
+    {
+      if(usu.nombre == this.usuarioLogueado)
+      {
+        this.modificarUsuarioPuntaje(usu)
+        break;
+      }
+    }
+  }
+
+  modificarExistente(usuario)
+  {
+    if(this.gano == true)
+    {
+      usuario.gano++;
+      this.db.collection("ahorcado").doc(this.usuarioLogueado).update({
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+        usuario : usuario.usuario,
+        juego : "ahorcado"
+      })
+    }
+    else if(this.gano == false)
+    {
+      usuario.perdio++;
+      this.db.collection("ahorcado").doc(this.usuarioLogueado).update({
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+        usuario : usuario.usuario,
+        juego : "ahorcado"
+      })
+    }
+  } 
+
+  modificarUsuarioPuntaje(usuario)
+  { 
+    if(this.gano == true)
+    {
+      usuario.gano++;
+      this.db.collection("usuarios").doc(this.usuarioLogueado).update({
+        nombre : this.usuarioLogueado,
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+      });
+    }
+    else
+    {
+      usuario.perdio++;
+      this.db.collection("usuarios").doc(this.usuarioLogueado).update({
+        nombre : this.usuarioLogueado,
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+      });
+    }
   }
 
 }

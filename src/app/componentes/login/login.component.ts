@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import {Subscription} from "rxjs";
 import { timer } from "rxjs";
 import { AngularFireAuth } from '@angular/fire/auth'
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-login',
@@ -13,13 +14,15 @@ import { AngularFireAuth } from '@angular/fire/auth'
 export class LoginComponent implements OnInit {
 
   private subscription: Subscription;
+
   correo : string = '';
   clave : string = '';
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authFire : AngularFireAuth) {
+    private authFire : AngularFireAuth,
+    private db : AngularFirestore) {
 
   }
 
@@ -31,6 +34,9 @@ export class LoginComponent implements OnInit {
      if(this.validarCorreo())
      {
         this.authFire.auth.signInWithEmailAndPassword(this.correo,this.clave).then(() => {
+          let usuario = this.correo.split("@");
+          localStorage.setItem("usuario", usuario[0]);
+          this.agregarUsuario(usuario[0]);
           this.router.navigate(["Principal"])
         }).catch( () =>{
           this.textoMostrar("No se encuentra registrado en la base");
@@ -78,6 +84,15 @@ export class LoginComponent implements OnInit {
   textoMostrar(mensaje : string)
   {
     $("#mensaje").text(mensaje);
+  }
+
+  agregarUsuario(usuario : string)
+  {
+    this.db.collection("usuarios").doc(usuario).set({
+      nombre : usuario,
+      gano : 0,
+      perdio : 0
+    })
   }
 
 }

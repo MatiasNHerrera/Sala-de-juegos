@@ -1,6 +1,8 @@
 
 import { Component, OnInit ,Input,Output,EventEmitter} from '@angular/core';
 import { JuegoAdivina } from '../../clases/juego-adivina'
+import { MiHttpService } from '../../servicios/mi-http/mi-http.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-adivina-el-numero',
@@ -10,16 +12,34 @@ import { JuegoAdivina } from '../../clases/juego-adivina'
 export class AdivinaElNumeroComponent implements OnInit {
  @Output() enviarJuego: EventEmitter<any>= new EventEmitter<any>();
 
+  gano : boolean
+  usuariosAdivina;
+  usuarioLogueado;
+  usuariosGeneral;
   nuevoJuego: JuegoAdivina;
   Mensajes:string;
   contador:number;
   ocultarVerificar:boolean;
  
-  constructor() { 
+  constructor(private service : MiHttpService, private db : AngularFirestore) {
+    this.service.getAdivina().subscribe((datos) => {
+      this.usuariosAdivina = datos;
+      this.usuarioLogueado = localStorage.getItem("usuario");
+      this.verificarNuevoAdivina();
+    });
+
+    this.service.getUsuarios().subscribe((datos) => {
+      this.usuariosGeneral = datos;
+    })
+
     this.nuevoJuego = new JuegoAdivina();
     console.info("numero Secreto:",this.nuevoJuego.numeroSecreto);  
     this.ocultarVerificar=false;
   }
+
+  ngOnInit() {
+  }
+
   generarnumero() {
     this.nuevoJuego.generarnumero();
     this.contador=0;
@@ -74,8 +94,10 @@ export class AdivinaElNumeroComponent implements OnInit {
     var x = document.getElementById("snackbar");
     if(ganador)
       {
+        this.gano = true;
         x.className = "show Ganador";
       }else{
+        this.gano = false;
         x.className = "show Perdedor";
       }
     var modelo=this;
@@ -84,9 +106,108 @@ export class AdivinaElNumeroComponent implements OnInit {
       modelo.ocultarVerificar=false;
      }, 3000);
     console.info("objeto",x);
+    this.cambiarResultadoBD();
+    this.cambiarResultadoUsuario();
   
    }  
-  ngOnInit() {
+   
+   verificarNuevoAdivina()
+  {
+    let flag = false;
+
+    for(let usu of this.usuariosAdivina)
+    {
+      if(usu.usuario == this.usuarioLogueado)
+      {
+        flag = true;
+        break;
+      }
+    }
+
+    if(!flag)
+    {
+      this.db.collection("adivina").doc(this.usuarioLogueado).set(
+        {
+          gano : 0,
+          perdio : 0,
+          usuario : this.usuarioLogueado,
+          juego : "adivina numero"
+        });
+    }
   }
 
+  cambiarResultadoBD()
+  {
+    let flag = false; 
+
+    for(let usu of this.usuariosAdivina)
+    {
+      if(usu.usuario == this.usuarioLogueado)
+      {
+        this.modificarExistente(usu);
+        break;
+      }
+    }
+  }
+
+  cambiarResultadoUsuario()
+  {
+    let flag = false; 
+
+    for(let usu of this.usuariosGeneral)
+    {
+      if(usu.nombre == this.usuarioLogueado)
+      {
+        this.modificarUsuarioPuntaje(usu)
+        break;
+      }
+    }
+  }
+
+  modificarExistente(usuario)
+  {
+    if(this.gano == true)
+    {
+      usuario.gano++;
+      this.db.collection("adivina").doc(this.usuarioLogueado).update({
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+        usuario : usuario.usuario,
+        juego : "adivina numero"
+      })
+
+    }
+    else
+    {
+      usuario.perdio++;
+      this.db.collection("adivina").doc(this.usuarioLogueado).update({
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+        usuario : usuario.usuario,
+        juego : "adivina numero"
+      })
+    }
+  }
+  
+  modificarUsuarioPuntaje(usuario)
+  { 
+    if(this.gano == true)
+    {
+      usuario.gano++;
+      this.db.collection("usuarios").doc(this.usuarioLogueado).update({
+        nombre : this.usuarioLogueado,
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+      });
+    }
+    else
+    {
+      usuario.perdio++;
+      this.db.collection("usuarios").doc(this.usuarioLogueado).update({
+        nombre : this.usuarioLogueado,
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+      });
+    }
+  }
 }

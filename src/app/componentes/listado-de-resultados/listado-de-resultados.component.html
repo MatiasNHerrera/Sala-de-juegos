@@ -5,15 +5,16 @@
       <tr>
         <th>Juego</th>
         <th>Jugador</th>
-        <th>Resultado</th>
+        <th>Gano</th>
+        <th>Perdio</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let juego of listado">
-        <td>{{juego.nombre}} </td>
-        <td>{{juego.jugador}} </td> 
-        <td *ngIf="juego.gano">Gano </td>   
-        <td *ngIf="!juego.gano">Perdio</td>     
+      <tr *ngFor="let juego of listadoGeneral">
+        <td>{{juego.juego}}</td>
+        <td>{{juego.usuario}} </td> 
+        <td>{{juego.gano}}</td>   
+        <td>{{juego.perdio}}</td>     
       </tr>
     </tbody>
 </table>

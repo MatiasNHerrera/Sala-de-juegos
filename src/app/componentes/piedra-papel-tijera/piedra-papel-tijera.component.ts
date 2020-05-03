@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { MiHttpService } from '../../servicios/mi-http/mi-http.service';
 
 @Component({
   selector: 'app-piedra-papel-tijera',
@@ -8,13 +10,28 @@ import * as $ from 'jquery';
 })
 export class PiedraPapelTijeraComponent implements OnInit {
 
+  usuariosGeneral;
+  gano;
+  usuariosPiedra;
+  usuarioLogueado;
   elejidoJugador : string;
   elejidoMaquina : string;
   opciones : string[] = ["piedra","papel","tijera"];
   contadorJugador = 0;
   contadorMaquina = 0;
 
-  constructor() { }
+  constructor(private db : AngularFirestore, private service : MiHttpService) 
+  {
+      this.service.getPiedra().subscribe((datos) => {
+         this.usuariosPiedra = datos;
+         this.usuarioLogueado = localStorage.getItem("usuario");
+         this.verificarNuevoPiedra();
+      });
+
+      this.service.getUsuarios().subscribe((datos) => {
+        this.usuariosGeneral = datos;
+      })
+  }
 
   ngOnInit(): void {
   }
@@ -110,11 +127,13 @@ export class PiedraPapelTijeraComponent implements OnInit {
   {
       if(this.contadorJugador == 3)
       {   
+          this.gano = true;
           $("#mensajeP").text('¡FELICITACIONES, SOS MEJOR QUE LA MAQUINA!')
           this.mostrarMensaje()
       }
       else if(this.contadorMaquina == 3)
       {
+          this.gano = false;
           $("#mensajeP").text('¡PERDISTE, LA MAQUINA ES MEJOR QUE VOS!')
           this.mostrarMensaje();
       }
@@ -135,6 +154,8 @@ export class PiedraPapelTijeraComponent implements OnInit {
   {
     $("#containerGame").attr("hidden", true);
     $("#containerMensaje").removeAttr("hidden");
+    this.cambiarResultadoBD();
+    this.cambiarResultadoUsuario();
   }
 
   reiniciarJuego()
@@ -150,6 +171,105 @@ export class PiedraPapelTijeraComponent implements OnInit {
         $("#containerGame").removeAttr("hidden");
 
       },1000);
+  }
+
+  verificarNuevoPiedra()
+  {
+    let flag = false;
+
+    for(let usu of this.usuariosPiedra)
+    {
+      if(usu.usuario == this.usuarioLogueado)
+      {
+        flag = true;
+        break;
+      }
+    }
+
+    if(!flag)
+    {
+      this.db.collection("piedra-papel-tijera").doc(this.usuarioLogueado).set(
+        {
+          gano : 0,
+          perdio : 0,
+          usuario : this.usuarioLogueado,
+          juego : "piedra-papel-tijera"
+        });
+    }
+  }
+
+  cambiarResultadoBD()
+  {
+    let flag = false; 
+
+    for(let usu of this.usuariosPiedra)
+    {
+      if(usu.usuario == this.usuarioLogueado)
+      {
+        this.modificarExistente(usu);
+        break;
+      }
+    }
+  }
+
+  cambiarResultadoUsuario()
+  {
+    let flag = false; 
+
+    for(let usu of this.usuariosGeneral)
+    {
+      if(usu.nombre == this.usuarioLogueado)
+      {
+        this.modificarUsuarioPuntaje(usu)
+        break;
+      }
+    }
+  }
+
+  modificarExistente(usuario)
+  {
+    if(this.gano == true)
+    {
+      usuario.gano++;
+      this.db.collection("piedra-papel-tijera").doc(this.usuarioLogueado).update({
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+        usuario : usuario.usuario,
+        juego : "piedra-papel-tijera"
+      })
+    }
+    else if(this.gano == false)
+    {
+      usuario.perdio++;
+      this.db.collection("piedra-papel-tijera").doc(this.usuarioLogueado).update({
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+        usuario : usuario.usuario,
+        juego : "piedra-papel-tijera"
+      })
+    }
+  } 
+
+  modificarUsuarioPuntaje(usuario)
+  { 
+    if(this.gano == true)
+    {
+      usuario.gano++;
+      this.db.collection("usuarios").doc(this.usuarioLogueado).update({
+        nombre : this.usuarioLogueado,
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+      });
+    }
+    else
+    {
+      usuario.perdio++;
+      this.db.collection("usuarios").doc(this.usuarioLogueado).update({
+        nombre : this.usuarioLogueado,
+        gano : usuario.gano,
+        perdio : usuario.perdio,
+      });
+    }
   }
 
 }

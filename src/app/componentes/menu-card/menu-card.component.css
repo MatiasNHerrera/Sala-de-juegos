@@ -10,6 +10,8 @@ h2
     color: ghostwhite;
     font-family: 'game';
     font-size: 5vw;
+    outline: none;
+    cursor: pointer;
 }
 
 h1

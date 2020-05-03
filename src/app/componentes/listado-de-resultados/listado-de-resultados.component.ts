@@ -1,5 +1,5 @@
-
 import { Component, OnInit , Input, EventEmitter} from '@angular/core';
+import { MiHttpService } from '../../servicios/mi-http/mi-http.service';
 
 @Component({
   selector: 'app-listado-de-resultados',
@@ -8,18 +8,91 @@ import { Component, OnInit , Input, EventEmitter} from '@angular/core';
 })
 export class ListadoDeResultadosComponent implements OnInit {
  @Input()
- listado: Array<any>;
 
+  listadoGeneral : any[] = [];
+  listadoTateti;
+  listadoAnagrama;
+  listadoAritmetica;
+  listadoPapel;
+  listadoAhorcado;
+  listadoAdivina;
 
-  constructor() {
+  constructor(private service : MiHttpService) {
+    this.getGeneral();
    }
 
   ngOnInit() {
 
   }
 
-  ver() {
-    console.info(this.listado);
+  getTateti()
+  {
+    this.service.getTateti().subscribe((datos) => {
+      for(let item of datos)
+      {
+        this.listadoGeneral.push(item);
+      }
+    })
+  }
+
+  getAnagrama()
+  {
+    this.service.getAnagrama().subscribe((datos) => {
+      for(let item of datos)
+      {
+        this.listadoGeneral.push(item);
+      }
+    })
+  }
+
+  getAritmetica()
+  {
+    this.service.getAgilidad().subscribe((datos) => {
+      for(let item of datos)
+      {
+        this.listadoGeneral.push(item);
+      }
+    })
+  }
+  
+  getPapel()
+  {
+    this.service.getPiedra().subscribe((datos) => {
+      for(let item of datos)
+      {
+        this.listadoGeneral.push(item);
+      }
+    })
+  }
+
+  getAhorcado()
+  {
+    this.service.getAhorcado().subscribe((datos) => {
+      for(let item of datos)
+      {
+        this.listadoGeneral.push(item);
+      }
+    })
+  }
+
+  getAdivina()
+  {
+    this.service.getAdivina().subscribe((datos) => {
+      for(let item of datos)
+      {
+        this.listadoGeneral.push(item);
+      }
+    })
+  }
+
+  getGeneral()
+  {
+    this.getTateti();
+    this.getAdivina();
+    this.getAhorcado();
+    this.getAnagrama();
+    this.getAritmetica();
+    this.getPapel();
   }
 
 }

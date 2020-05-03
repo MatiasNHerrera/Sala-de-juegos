@@ -9,31 +9,15 @@
     <thead>
       <tr>
         <th>usuario</th>
-        <th>cuit</th>
-        <th>sexo</th>
-        <th>gano</th>
+        <th *ngIf="!ganadores">gano</th>
+        <th *ngIf="!perdedores">perdio</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let jugador of listado" >
-        <td>{{jugador.usuario}}</td>
-        <td>{{jugador.cuit}}</td> 
-        <td>{{jugador.sexo | sexo | uppercase}}</td> 
-        <td>{{jugador.gano}}</td> 
+      <tr *ngFor="let jugador of listadoGeneral" >
+        <td>{{jugador.nombre}}</td>
+        <td *ngIf="!ganadores">{{jugador.gano}}</td> 
+        <td *ngIf="!perdedores">{{jugador.perdio}}</td> 
       </tr>
-      <tr>
-        <td>Herrera</td>
-        <td>2032323</td> 
-        <td>Masculino</td> 
-        <td>si</td> 
-      </tr>
-      <tr>
-        <td>El Pibe</td>
-        <td>4434343</td> 
-        <td>Masculino</td> 
-        <td>no</td> 
-      </tr>
-      
-      
     </tbody>
   </table>
